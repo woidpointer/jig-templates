@@ -1,0 +1,5 @@
+---
+# questions
+class:
+  type: str
+  help: Name of the class
