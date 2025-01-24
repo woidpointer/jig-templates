@@ -1,0 +1,8 @@
+---
+# questions
+class:
+  type: str
+  help: What is your name of the cpp class?
+namespace:
+  type: str
+  help: "C++ namespace"
