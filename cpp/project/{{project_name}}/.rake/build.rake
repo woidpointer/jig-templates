@@ -7,7 +7,7 @@ def build_conan_install(cfg)
   cmd << 'conan install'
   cmd << '.'
   cmd << "--output-folder=#{build_dir}"
-  cmd << "-pr:a=#{workdir}/support/conan/#{cfg['compiler']}__#{cfg['triplet']}"
+  cmd << "-pr:a=#{workdir}/.conan/#{cfg['compiler']}__#{cfg['triplet']}"
   cmd << "-s build_type=#{cfg['type']}"
   cmd << '--build missing'
   sh cmd.join(' ')
@@ -42,14 +42,14 @@ end
 # Metaprogrammed cache creation tasks.
 #
 # The creation of task is controlled by the existens of conan profile files
-# located in support/conan.
+# located in conan.
 #
 # Each conan profile must support the form: <compiler>__<compiler_triplet>
 #
 # There is always a debug and a release cache initialization generated.
 #
 # rubocop:disable Metrics/BlockLength
-Dir.glob('support/conan/*') do |profile|
+Dir.glob('.conan/*') do |profile|
   basename = File.basename(profile)
   match = basename.match(/^(.+?)__/)
   if match
@@ -68,7 +68,7 @@ Dir.glob('support/conan/*') do |profile|
 
           build_conan_install(config)
           sh 'cmake --preset conan-debug'
-          cp "#{build_dir}/compile_commands.json", '.'
+          cp "#{build_dir}/compile_commands.json", '.' if File.exist?("#{build_dir}/compile_commands.json")
         end
 
         desc 'Initiale project in release version'
@@ -82,7 +82,7 @@ Dir.glob('support/conan/*') do |profile|
           end
           build_conan_install(config)
           sh 'cmake --preset conan-release'
-          cp "#{build_dir}/compile_commands.json", '.'
+          cp "#{build_dir}/compile_commands.json", '.' if File.exist?("#{build_dir}/compile_commands.json")
         end
       end
     end

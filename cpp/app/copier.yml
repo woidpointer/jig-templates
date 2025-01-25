@@ -1,5 +1,5 @@
 ---
 # questions
-libname:
+appname:
   type: str
-  help: What is your library name?
+  help: What is your application name?
