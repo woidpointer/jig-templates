@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+# Monkey patching Object for more comfort
+class Object
+  def build_dir
+    'build'
+  end
+
+  def conan_toolchain
+    "#{build_dir}/conan_toolchain.cmake"
+  end
+
+  def workdir
+    pwd
+  end
+
+  def jigrake_info_json
+    "#{build_dir}/jigrake_info.json"
+  end
+end
+
+task :nuke do
+  rm_rf build_dir
+end
+
+task distclean: [:nuke]
+
+task default: [:b]
+
+Dir.glob('.rake/*.rake') do |rfile|
+  load rfile
+end

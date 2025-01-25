@@ -1,0 +1,20 @@
+from conan import ConanFile
+from conan.tools.files import copy
+
+
+class {{ project_name.replace('-','_') }}Conan(ConanFile):
+    settings = "os", "compiler", "build_type", "arch"
+    generators = "CMakeDeps", "CMakeToolchain"
+
+    def requirements(self):
+        self.requires("spdlog/1.14.1")
+        self.requires("gtest/1.15.0")
+        # self.requires("vsomeip/3.3.8")
+        self.requires("nlohmann_json/3.11.3")
+        # self.requires("grpc/1.65.0")
+        self.requires("boost/1.84.0")
+
+    def generate(self):
+        if "vsomeip" in self.dependencies:
+            vsomeip = self.dependencies["vsomeip"]
+            copy(self, "lib*.so.*", vsomeip.cpp_info.libdir, f"{self.build_folder}/lib")

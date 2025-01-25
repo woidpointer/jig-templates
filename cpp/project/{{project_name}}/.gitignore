@@ -1,0 +1,6 @@
+.cache
+build
+CMakeUserPresets.json
+compile_commands.json
+.rake_tasks~
+DVACfgCmd.log
