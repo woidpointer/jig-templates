@@ -1,0 +1,10 @@
+set (TARGET {{appname}})
+
+find_package(spdlog)
+
+add_executable(${TARGET})
+
+target_sources(${TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+
+target_link_libraries(${TARGET} PRIVATE spdlog::spdlog)
+
