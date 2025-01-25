@@ -1,0 +1,20 @@
+#ifndef {{ include_guard }}
+#define {{ include_guard }}
+
+{% for ns in namespace_list -%}
+namespace {{ ns }} {
+{% endfor %}
+
+class {{ Class }} {
+  public:
+    {{ Class }}();
+
+  private:
+
+};
+
+{% for ns in namespace_rlist -%}
+} // namespace {{ ns }}
+{% endfor %}
+
+#endif  // {{ include_guard }}

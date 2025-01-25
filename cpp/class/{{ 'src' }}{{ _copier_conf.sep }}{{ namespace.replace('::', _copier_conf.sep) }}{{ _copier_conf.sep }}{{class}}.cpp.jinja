@@ -1,0 +1,15 @@
+
+#include "{{ include_path }}"
+
+{% for ns in namespace_list -%}
+namespace {{ ns }} {
+{% endfor %}
+
+{{ Class }}::{{ Class }}() {};
+
+{% for ns in namespace_rlist -%}
+} // namespace {{ ns }}
+{% endfor %}
+
+
+
