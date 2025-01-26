@@ -1,0 +1,49 @@
+cmake_minimum_required(VERSION 3.25)
+
+project({{ libname  }})
+
+find_package(spdlog REQUIRED)
+find_package(Boost REQUIRED COMPONENTS thread)
+#find_package(Protobuf REQUIRED)
+#find_package(gRPC CONFIG REQUIRED)
+
+add_library(${PROJECT_NAME})
+
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+
+target_compile_definitions(${PROJECT_NAME}
+  PRIVATE
+  # depending on the option switch define the preprocessor define or not
+  )
+
+target_compile_options(${PROJECT_NAME}
+  PRIVATE
+)
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+target_sources(${PROJECT_NAME}
+  PRIVATE
+    # Add all sources to compile here
+    #${CMAKE_CURRENT_SOURCE_DIR}/src/
+)
+
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+target_link_libraries(${PROJECT_NAME}
+  PRIVATE # libraries which does not contribute to the interface
+    Boost::boost
+    Boost::thread
+    spdlog::spdlog
+)
+
+# Add unit test
+add_subdirectory(test)
+
+
