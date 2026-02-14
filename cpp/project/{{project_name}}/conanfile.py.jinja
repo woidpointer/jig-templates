@@ -12,7 +12,7 @@ class {{ project_name.replace('-','_') }}Conan(ConanFile):
         # self.requires("vsomeip/3.3.8")
         self.requires("nlohmann_json/3.11.3")
         # self.requires("grpc/1.65.0")
-        self.requires("boost/1.84.0")
+        self.requires("boost/1.90.0")
 
     def generate(self):
         if "vsomeip" in self.dependencies:

@@ -1,0 +1,13 @@
+[settings]
+arch=x86_64
+compiler=gcc
+compiler.version=15
+compiler.cppstd=17
+compiler.libcxx=libstdc++11
+os=Linux
+
+[options]
+
+[buildenv]
+CC=gcc-15
+CXX=g++-15
